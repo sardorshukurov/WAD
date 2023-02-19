@@ -8,15 +8,14 @@ namespace WAD.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter a title")]
-        [MinLength(5), StringLength(100)]
+        [MinLength(5), MaxLength(100)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Please enter an author")]
-        [MinLength(5), StringLength(100)]
-        public string Author { get; set; }
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
 
         [Required(ErrorMessage = "Please enter a publisher")]
-        [MinLength(5), StringLength(100)]
+        [MinLength(5), MaxLength(100)]
         public string Publisher { get; set; }
 
         [DataType(DataType.Date)]
@@ -32,19 +31,18 @@ namespace WAD.Models
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Please enter a quantity")]
-        [Range(1, int.MaxValue, ErrorMessage = "Please enter a positive quantity")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter a positive quantity")]
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "Please enter a description")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Please enter a category")]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
         public string Image { get; set; }
 
         [Range(0, 5, ErrorMessage = "Please enter a rating between 0 and 5")]
         public double Rating { get; set; }
     }
-
 }

@@ -9,10 +9,10 @@ namespace WAD.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [MaxLength(100)]
         public string Name { get; set; }
 
-        [StringLength(500)]
+        [MaxLength(500)]
         public string Description { get; set; }
 
         public ICollection<Book> Books { get; set; }

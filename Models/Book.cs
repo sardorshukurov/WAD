@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WAD.Models
 {
@@ -12,6 +14,7 @@ namespace WAD.Models
         public string Title { get; set; }
 
         public int AuthorId { get; set; }
+        [JsonIgnore]
         public Author Author { get; set; }
 
         [Required(ErrorMessage = "Please enter a publisher")]
@@ -38,6 +41,7 @@ namespace WAD.Models
         public string Description { get; set; }
 
         public int CategoryId { get; set; }
+        [JsonIgnore]
         public Category Category { get; set; }
 
         public string Image { get; set; }

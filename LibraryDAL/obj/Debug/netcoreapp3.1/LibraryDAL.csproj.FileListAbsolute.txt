@@ -1,0 +1,5 @@
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.csproj.AssemblyReference.cache
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.AssemblyInfoInputs.cache
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.AssemblyInfo.cs
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.csproj.CoreCompileInputs.cache

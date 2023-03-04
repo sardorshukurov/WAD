@@ -22,7 +22,6 @@ namespace WAD.Models
         public DateTime PublicationDate { get; set; }
 
         [Required(ErrorMessage = "Please enter an ISBN")]
-        [RegularExpression(@"^(97(8|9))?\d{9}(\d|X)$", ErrorMessage = "Please enter a valid ISBN")]
         public string ISBN { get; set; }
 
         [Required(ErrorMessage = "Please enter a price")]

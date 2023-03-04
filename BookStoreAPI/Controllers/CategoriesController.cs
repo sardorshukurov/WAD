@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookStoreAPI.Exceptions;
+using BookStoreAPI.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,97 +16,90 @@ namespace WAD.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly StoreContext _context;
+        private readonly CategoriesRepository _categoriesRepository;
 
-        public CategoriesController(StoreContext context)
+        public CategoriesController(CategoriesRepository categoriesRepository)
         {
-            _context = context;
+            _categoriesRepository = categoriesRepository;
         }
 
         // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public ActionResult<IEnumerable<Category>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+            try
+            {
+                var categories = _categoriesRepository.GetCategories();
+                return Ok(categories);
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public ActionResult<Category> GetCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-
-            if (category == null)
+            try
             {
-                return NotFound();
+                var category = _categoriesRepository.GetCategoryByID(id);
+                return Ok(category);
             }
-
-            return category;
+            catch (AppException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT: api/Categories/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public IActionResult PutCategory(int id, Category category)
         {
-            if (id != category.ID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(category).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _categoriesRepository.UpdateCategory(id, category);
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (AppException ex)
             {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound(ex.Message);
             }
-
-            return NoContent();
         }
 
         // POST: api/Categories
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public ActionResult<Category> PostCategory(Category category)
         {
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCategory", new { id = category.ID }, category);
+            try
+            {
+                _categoriesRepository.InsertCategory(category);
+                return CreatedAtAction(nameof(GetCategory), new { id = category.ID }, category);
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Categories/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Category>> DeleteCategory(int id)
+        public ActionResult<Category> DeleteCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            try
             {
-                return NotFound();
+                _categoriesRepository.DeleteCategory(id);
+                return NoContent();
             }
-
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-
-            return category;
-        }
-
-        private bool CategoryExists(int id)
-        {
-            return _context.Categories.Any(e => e.ID == id);
+            catch (AppException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

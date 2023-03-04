@@ -26,6 +26,8 @@ namespace WAD
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddTransient<BooksRepository>();
+            services.AddTransient<CategoriesRepository>();
+            services.AddTransient<AuthorsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

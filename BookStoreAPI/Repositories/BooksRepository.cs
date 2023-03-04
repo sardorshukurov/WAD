@@ -44,6 +44,7 @@ namespace BookStoreAPI.Repositories
             {
                 Book book = _dbContext.Books.Find(bookID);
                 _dbContext.Entry(book).Reference(s => s.Category).Load();
+                _dbContext.Entry(book).Reference(s => s.Author).Load();
                 if (book == null)
                 {
                     throw new AppException($"Book with ID {bookID} not found.");
@@ -60,7 +61,7 @@ namespace BookStoreAPI.Repositories
         {
             try
             {
-                IEnumerable<Book> books = _dbContext.Books.Include(s => s.Category).ToList();
+                IEnumerable<Book> books = _dbContext.Books.Include(s => s.Category).Include(s => s.Author).ToList();
                 if (books == null)
                 {
                     throw new AppException($"Book are not found.");
@@ -83,6 +84,7 @@ namespace BookStoreAPI.Repositories
                 }
 
                 book.Category = _dbContext.Categories.Find(book.Category.ID);
+                book.Author = _dbContext.Authors.Find(book.Author.ID);
                 _dbContext.Books.Add(book);
                 _dbContext.SaveChanges();
             }
@@ -92,25 +94,35 @@ namespace BookStoreAPI.Repositories
             }
         }
 
-        public void UpdateBook(int bookId, Book updatedBook)
+        public void UpdateBook(int bookID, Book updatedBook)
         {
             try
             {
-                Book book = _dbContext.Books.Find(bookId);
+                Book book = _dbContext.Books.Find(bookID);
                 if (book == null)
                 {
-                    throw new AppException($"Book with ID {bookId} not found.");
+                    throw new AppException($"Book with ID {bookID} not found.");
                 }
 
+                _dbContext.Entry(book).State = EntityState.Modified;
+
                 book.Title = updatedBook.Title;
-                book.Author = updatedBook.Author;
+                book.Author = _dbContext.Authors.Find(updatedBook.Author.ID); ;
+                book.Publisher = updatedBook.Publisher;
+                book.PublicationDate = updatedBook.PublicationDate;
+                book.ISBN = updatedBook.ISBN;
                 book.Price = updatedBook.Price;
+                book.Quantity = updatedBook.Quantity;
+                book.Description = updatedBook.Description;
+                book.Category = _dbContext.Categories.Find(updatedBook.Category.ID);
+                book.Image = updatedBook.Image;
+                book.Rating = updatedBook.Rating;
 
                 _dbContext.SaveChanges();
             }
             catch (DbException ex)
             {
-                throw new AppException($"An error occurred while updating the book with ID {bookId}.", ex);
+                throw new AppException($"An error occurred while updating the book with ID {bookID}.", ex);
             }
         }
     }

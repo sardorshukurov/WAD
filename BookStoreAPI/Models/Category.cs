@@ -6,7 +6,7 @@ namespace WAD.Models
     public class Category
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -14,7 +14,5 @@ namespace WAD.Models
 
         [MaxLength(500)]
         public string Description { get; set; }
-
-        public ICollection<Book> Books { get; set; }
     }
 }

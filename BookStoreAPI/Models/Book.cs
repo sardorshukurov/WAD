@@ -1,19 +1,16 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace WAD.Models
 {
     public class Book
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "Please enter a title")]
         [MinLength(5), MaxLength(100)]
         public string Title { get; set; }
 
-        public int AuthorId { get; set; }
         public Author Author { get; set; }
 
         [Required(ErrorMessage = "Please enter a publisher")]
@@ -39,7 +36,6 @@ namespace WAD.Models
         [Required(ErrorMessage = "Please enter a description")]
         public string Description { get; set; }
 
-        public int CategoryId { get; set; }
         public Category Category { get; set; }
 
         public string Image { get; set; }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookStoreAPI.Exceptions;
+using BookStoreAPI.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,97 +16,90 @@ namespace WAD.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly StoreContext _context;
+        private readonly BooksRepository _booksRepository;
 
-        public BooksController(StoreContext context)
+        public BooksController(BooksRepository booksRepository)
         {
-            _context = context;
+            _booksRepository = booksRepository;
         }
 
         // GET: api/Books
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        public ActionResult<IEnumerable<Book>> GetBooks()
         {
-            return await _context.Books.ToListAsync();
+            try
+            {
+                var books = _booksRepository.GetBooks();
+                return Ok(books);
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // GET: api/Books/5
+            // GET: api/Books/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(int id)
+        public ActionResult<Book> GetBook(int id)
         {
-            var book = await _context.Books.FindAsync(id);
-
-            if (book == null)
+            try
             {
-                return NotFound();
+                var book = _booksRepository.GetBookByID(id);
+                return Ok(book);
             }
-
-            return book;
+            catch (AppException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT: api/Books/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBook(int id, Book book)
+        public IActionResult PutBook(int id, Book book)
         {
-            if (id != book.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(book).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _booksRepository.UpdateBook(id, book);
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (AppException ex)
             {
-                if (!BookExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound(ex.Message);
             }
-
-            return NoContent();
         }
 
         // POST: api/Books
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Book>> PostBook(Book book)
+        public ActionResult<Book> PostBook(Book book)
         {
-            _context.Books.Add(book);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBook", new { id = book.Id }, book);
-        }
-
-        // DELETE: api/Books/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Book>> DeleteBook(int id)
-        {
-            var book = await _context.Books.FindAsync(id);
-            if (book == null)
+            try
             {
-                return NotFound();
+                _booksRepository.InsertBook(book);
+                return CreatedAtAction(nameof(GetBook), new { id = book.ID }, book);
             }
-
-            _context.Books.Remove(book);
-            await _context.SaveChangesAsync();
-
-            return book;
+            catch (AppException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        private bool BookExists(int id)
+            // DELETE: api/Books/5
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBook(int id)
         {
-            return _context.Books.Any(e => e.Id == id);
+            try
+            {
+                _booksRepository.DeleteBook(id);
+                return NoContent();
+            }
+            catch (AppException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

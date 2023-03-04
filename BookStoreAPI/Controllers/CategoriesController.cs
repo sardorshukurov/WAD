@@ -48,7 +48,7 @@ namespace WAD.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategory(int id, Category category)
         {
-            if (id != category.Id)
+            if (id != category.ID)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace WAD.Controllers
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+            return CreatedAtAction("GetCategory", new { id = category.ID }, category);
         }
 
         // DELETE: api/Categories/5
@@ -104,7 +104,7 @@ namespace WAD.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.ID == id);
         }
     }
 }

@@ -48,7 +48,7 @@ namespace WAD.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAuthor(int id, Author author)
         {
-            if (id != author.Id)
+            if (id != author.ID)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace WAD.Controllers
             _context.Authors.Add(author);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAuthor", new { id = author.Id }, author);
+            return CreatedAtAction("GetAuthor", new { id = author.ID }, author);
         }
 
         // DELETE: api/Authors/5
@@ -104,7 +104,7 @@ namespace WAD.Controllers
 
         private bool AuthorExists(int id)
         {
-            return _context.Authors.Any(e => e.Id == id);
+            return _context.Authors.Any(e => e.ID == id);
         }
     }
 }

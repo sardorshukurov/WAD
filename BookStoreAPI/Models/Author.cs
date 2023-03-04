@@ -6,7 +6,7 @@ namespace WAD.Models
     public class Author
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(100)]

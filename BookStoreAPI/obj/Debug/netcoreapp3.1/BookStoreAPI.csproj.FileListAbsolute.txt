@@ -136,3 +136,5 @@ D:\Uni\WAD\GitHub\WAD\BookStoreAPI\obj\Debug\netcoreapp3.1\BookStoreAPI.csproj.C
 D:\Uni\WAD\GitHub\WAD\BookStoreAPI\obj\Debug\netcoreapp3.1\BookStoreAPI.dll
 D:\Uni\WAD\GitHub\WAD\BookStoreAPI\obj\Debug\netcoreapp3.1\BookStoreAPI.pdb
 D:\Uni\WAD\GitHub\WAD\BookStoreAPI\obj\Debug\netcoreapp3.1\BookStoreAPI.genruntimeconfig.cache
+D:\Uni\WAD\GitHub\WAD\BookStoreAPI\bin\Debug\netcoreapp3.1\LibraryDAL.dll
+D:\Uni\WAD\GitHub\WAD\BookStoreAPI\bin\Debug\netcoreapp3.1\LibraryDAL.pdb

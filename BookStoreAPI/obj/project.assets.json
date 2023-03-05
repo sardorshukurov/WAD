@@ -2912,6 +2912,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "LibraryDAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.32"
+        },
+        "compile": {
+          "bin/placeholder/LibraryDAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LibraryDAL.dll": {}
+        }
       }
     }
   },
@@ -8817,10 +8830,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "LibraryDAL/1.0.0": {
+      "type": "project",
+      "path": "../LibraryDAL/LibraryDAL.csproj",
+      "msbuildProject": "../LibraryDAL/LibraryDAL.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "LibraryDAL >= 1.0.0",
       "Microsoft.EntityFrameworkCore.InMemory >= 3.1.32",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.32",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.32",
@@ -8853,7 +8872,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Uni\\WAD\\GitHub\\WAD\\LibraryDAL\\LibraryDAL.csproj": {
+              "projectPath": "D:\\Uni\\WAD\\GitHub\\WAD\\LibraryDAL\\LibraryDAL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

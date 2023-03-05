@@ -3,3 +3,11 @@ D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.GeneratedMSB
 D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.AssemblyInfoInputs.cache
 D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.AssemblyInfo.cs
 D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.csproj.CoreCompileInputs.cache
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\bin\Debug\netcoreapp3.1\LibraryDAL.deps.json
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\bin\Debug\netcoreapp3.1\LibraryDAL.runtimeconfig.json
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\bin\Debug\netcoreapp3.1\LibraryDAL.runtimeconfig.dev.json
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\bin\Debug\netcoreapp3.1\LibraryDAL.dll
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\bin\Debug\netcoreapp3.1\LibraryDAL.pdb
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.dll
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.pdb
+D:\Uni\WAD\GitHub\WAD\LibraryDAL\obj\Debug\netcoreapp3.1\LibraryDAL.genruntimeconfig.cache
